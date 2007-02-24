@@ -1,0 +1,84 @@
+namespace rng = "http://relaxng.org/ns/structure/1.0"
+datatypes xsd = "http://www.w3.org/2001/XMLSchema-datatypes"
+
+# Document general structure
+
+start =
+    element vulnerabilities
+    {
+        element informations {informations.class},
+        element service {service.class}*
+    }
+
+# Classes
+
+informations.class = 
+    element total-vulnerabilities {xsd:integer},
+    element last-update {xsd:date}
+
+service.class = 
+    attribute id {IdService},
+    element name {text},
+    element protocol {Protocol},
+    element port {Port},
+    element vulnerability {vulnerability.class}+
+
+vulnerability.class =
+    attribute id {IdVulnerability},
+    element id-bugtrack {IdBugTrack}?,
+    element id-cve {IdCVE}?,
+    element date-publication {xsd:date}?,
+    element publisher {text}?,
+    element description {text}?,
+    element type {AttackType},
+    element platform {platform.class}*
+
+platform.class =
+    element name {PlatformName},
+    element version {
+        element name {PlatformVersion},
+        element distribution {Distribution}*
+    }*
+
+# Facets
+
+IdService = xsd:string
+{
+    pattern = 's-[0-9]{4}'
+}
+
+IdVulnerability = xsd:string
+{
+    pattern = 'v-[0-9]{4}'
+}
+
+IdBugTrack = xsd:integer
+
+IdCVE = xsd:string
+{
+    pattern = '(CVE|cve)-[0-9]{4}-[0-9]{4}'
+}
+
+Port = xsd:integer
+{
+    maxExclusive = '65536'
+}
+
+Protocol = xsd:string
+{
+    pattern = 'tcp|udp'
+}
+
+AttackType = xsd:string
+{
+    pattern = 'stack overflow|heap overflow|dos|format string'
+}
+
+PlatformName = xsd:string
+{
+    pattern = 'Aix|Bsd|HP|Irix|Linux|Novell|Osx|Qnx|Sco|Solaris|Tru64|Ultrix|Unix|Windows'
+}
+
+PlatformVersion = text
+
+Distribution = text

@@ -1,0 +1,37 @@
+namespace rng = "http://relaxng.org/ns/structure/1.0"
+datatypes xsd = "http://www.w3.org/2001/XMLSchema-datatypes"
+
+# Document general structure
+
+start =
+    element exploits
+    {
+        element informations {informations.class},
+        element vulnerability {vulnerability.class}*
+    }
+
+# Classes
+
+informations.class = 
+    element total-exploits {xsd:integer},
+    element last-update {xsd:date}
+
+vulnerability.class =
+    attribute id {IdVulnerability},
+    attribute remote {xsd:boolean},
+    element exploit {exploit.class}*
+
+exploit.class =
+    attribute id {IdExploit}
+
+# Facets
+
+IdVulnerability = xsd:string
+{
+    pattern = 'v-[0-9]{4}'
+}
+
+IdExploit = xsd:string
+{
+    pattern = 'e-[0-9]{4}'
+}

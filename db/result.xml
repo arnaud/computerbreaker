@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?oxygen RNGSchema="result.rnc" type="compact"?>
+<result>
+	<host name="00.0d.04.60.e7.30" ip="192.168.4.187"/>
+	<system></system>
+	<ports>
+		<port protocol="tcp" portid="445">
+			<service name="microsoft-ds"/>
+			<information>
+				<id>11808</id>
+				<name>Microsoft RPC Interface Buffer Overrun (823980)</name>
+				<family>Windows</family>
+				<cve_id>CVE-2003-0352</cve_id>
+				<bugtraq_id>8205</bugtraq_id>
+				<category>attack</category>
+				<risk>Unknown</risk>
+			</information>
+		</port>
+		<port protocol="udp" portid="545">
+			<service name="microsoft-ds"/>
+			<information>
+				<id>11808</id>
+				<name>Microsoft RPC Interface Buffer Overrun (823980)</name>
+				<family>Windows</family>
+				<cve_id>CVE-2003-0352</cve_id>
+				<bugtraq_id>8205</bugtraq_id>
+				<category>attack</category>
+				<risk>None</risk>
+			</information>
+		</port>
+	</ports>
+</result>

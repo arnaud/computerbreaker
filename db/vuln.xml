@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?oxygen RNGSchema="vuln.rnc" type="compact"?>
+<vulnerabilities>
+    <informations>
+        <total-vulnerabilities>3</total-vulnerabilities>
+        <last-update>2007-01-25</last-update>
+    </informations>
+    <service id="s-0001">
+        <name>KMAS</name>
+        <protocol>tcp</protocol>
+        <port>12345</port>
+        <vulnerability id="v-0001">
+            <id-bugtrack>9999999999</id-bugtrack>
+            <id-cve>cve-0000-0000</id-cve>
+            <date-publication>2006-11-21</date-publication>
+            <publisher>Computer Breaker Team</publisher>
+            <description>There is a big security issue with a remote format bug that allows attacker to execute arbitrary code</description>
+            <type>format string</type>
+            <platform>
+                <name>Linux</name>
+            </platform>
+        </vulnerability>
+    </service>
+    <service id="s-0002">
+        <name>Buffer Overflow Example</name>
+        <protocol>tcp</protocol>
+        <port>25252</port>
+        <vulnerability id="v-0002">
+            <id-bugtrack>9999999999</id-bugtrack>
+            <id-cve>cve-0000-0000</id-cve>
+            <date-publication>2007-01-17</date-publication>
+            <publisher>Computer Breaker Team</publisher>
+            <description>There is a big security issue with a remote buffer overflow that allows attacker to execute arbitrary code</description>
+            <type>buffer overflow</type>
+            <platform>
+                <name>Linux</name>
+            </platform>
+        </vulnerability>
+    </service>
+	<service id="s-0003">
+        <name>Heap Overflow Example</name>
+        <protocol>tcp</protocol>
+        <port>44211</port>
+        <vulnerability id="v-0003">
+            <id-bugtrack>9999999999</id-bugtrack>
+            <id-cve>cve-0000-0000</id-cve>
+            <date-publication>2007-01-25</date-publication>
+            <publisher>Computer Breaker Team</publisher>
+            <description>There is a big security issue with a remote heap overflow that allows attacker to execute arbitrary code</description>
+            <type>heap overflow</type>
+            <platform>
+                <name>Linux</name>
+            </platform>
+        </vulnerability>
+    </service>
+</vulnerabilities>

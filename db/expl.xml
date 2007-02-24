@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?oxygen RNGSchema="expl.rnc" type="compact"?>
+<exploits>
+    <informations>
+        <total-exploits>3</total-exploits>
+        <last-update>2007-01-25</last-update>
+    </informations>
+    <vulnerability id="v-0001" remote="true">
+        <exploit id="e-0001"/>
+    </vulnerability>
+    <vulnerability id="v-0002" remote="true">
+        <exploit id="e-0002"/>
+    </vulnerability>
+	<vulnerability id="v-0003" remote="true">
+        <exploit id="e-0003"/>
+    </vulnerability>
+</exploits>

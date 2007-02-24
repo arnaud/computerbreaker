@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# This file is part of the Computer Breaker project.
+#
+#    Computer Breaker is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    Computer Breaker is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with Computer Breaker; if not, write to the Free Software
+#    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+
+# check whether we have echo -n, depending
+# on the current shell, used
+case `echo -n` in
+\-n)	Xn=   ; Xc='\c' ;;
+*)	Xn=-n ; Xc=
+esac
+
+## Prerequisites
+
+# Checks if the nessus daemon is installed
+if [ `which nessusd 2>/dev/null | wc -l` -lt 1 ]
+then
+	echo $Xn "Nessus daemon is not installed $Xc"
+	exit -1
+fi
+
+# Checks if the nessus program is installed
+if [ `which nessus 2>/dev/null | wc -l` -lt 1 ]
+then
+	echo $Xn "Nessus program is not installed $Xc"
+	exit -1
+fi
+
+#if [ -z "$is_cygwin" ];
+#then
+## make sure that we are root
+# case `id` in uid=0*) ;; *)
+#    echo $Xn "only root should use this script $Xc"
+#    exit 1
+# esac
+#fi
+
+## End of prerequisites
+
+# Read IP address
+addressip=$1
+test -z "$1" && {
+	echo $Xn "IP address to attack : $Xc"
+	read addressip
+}
+test -z "$addressip" && {
+	echo "No Ip Address entered"
+	exit 1
+}
+
+# Search for the nessus daemon processus
+if [ `ps -A | grep nessusd | wc -l` -lt 1 ]
+then
+	nessusd -D >nessusd.log
+fi
+
+# Save the IP address in a temporary file
+> ip.txt
+echo "$addressip" >> ip.txt
+
+# Run Nessus
+nessus -T xml localhost 1241 root azerty ./ip.txt nessus_output 2>nessus.log
+
+# Delete the temporary file
+rm ip.txt

@@ -1,0 +1,49 @@
+namespace rng = "http://relaxng.org/ns/structure/1.0"
+datatypes xsd = "http://www.w3.org/2001/XMLSchema-datatypes"
+
+# Document general structure
+
+start =
+    element result
+    {
+        element host {host.class},
+        element system {text},
+        element ports {ports.class}*
+    }
+
+# Classes
+
+host.class = 
+    attribute name {text},
+    attribute ip {text}
+
+ports.class = 
+    element port {port.class}
+
+port.class =
+    attribute protocol {xsd:string},
+    attribute portid {xsd:integer},
+    element service{service.class},
+    element information {information.class}
+
+service.class =
+    attribute name {xsd:string}
+
+information.class =
+    element id {xsd:integer},
+    element name {text},
+    element family {text},
+    element cve_id {text},
+    element bugtraq_id {text},
+    element category {text},
+    element risk {text}
+
+# Facets
+IpHost = xsd:string
+{
+    # pattern = '([0-9]{3}\.){3}[0-9]{3}'
+    pattern = '([0-255]\.){3}[0-255]'
+}
+
+
+

