@@ -163,7 +163,8 @@ bool Breaker::searchInformations() {
 	char script[80];
 	strcpy (script, "src/modules/scanner/nessus ");
 	strcat (script, _remote_host->getIpAddress().c_str());
-	int result = 0;//system(script);
+	//int result = 0;
+	int result = system(script);
 	
 	getLogger().debug("Breaker : searchInformations() - end");
 	return result == 0;
@@ -175,7 +176,8 @@ bool Breaker::searchInformations() {
 bool Breaker::convertNessusResults() {
 	getLogger().debug("Breaker : convertNessusResults() - begin");
 	
-	bool result = true;//_target_infos_handler->transformNessusResults();
+	//bool result = true;
+	bool result = _target_infos_handler->transformNessusResults();
 	
 	getLogger().debug("Breaker : convertNessusResults() - end");
 	return result;
