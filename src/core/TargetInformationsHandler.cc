@@ -68,7 +68,7 @@ TargetInformationsHandler::~TargetInformationsHandler() {
 
 bool TargetInformationsHandler::transformNessusResults() {
 	XalanTransform transformer;
-	int result = transformer.transform("nessus_output", "bdd/transform.xsl", "results.xml");
+	int result = transformer.transform("nessus_output", "db/transform.xsl", "results.xml");
 	return result == 0;
 }
 

@@ -772,7 +772,7 @@ TCollection<Exploit*> *XPathQueryManager::getXpathResultExploits(const std::stri
 						
 						// on récupere ensuite les informations contenus dans le fichier [idExploit].xml
 
-						std::string exploitFileName = "bdd/expl/" + idExploit + ".xml";
+						std::string exploitFileName = "db/expl/" + idExploit + ".xml";
 						// Create an input source that represents the exploit file.
 						const LocalFileInputSource theInputSource(((XalanDOMString)exploitFileName.c_str()).c_str());
 						getLogger().warn("XPathQueryManager : getXpathResultExploits() - id exploit: %s", idExploit.c_str());
