@@ -11,24 +11,24 @@ h2. Installation
 
 h3. Prerequisites
 
-Before compiling the software, you will need to install the following libraries :
+Before compiling the software, you will need to install the following libraries:
  * xalan libraries
  * xerces libraries
  * log4cpp libraries
  * boost regex libraries
 
-Under Debian, you can use the following :
+Under Debian, you can use the following:
 @~# apt-get install gcc g++ libxalan18-dev libxerces25-dev liblog4cpp-dev libboost-regex-dev@
 
 h3. Compilation
 
-You can compile the program with the following code :
+You can compile the program with the following code:
 @~# make computerbreaker@
 
 h2. Usage
 
-<code>~# ./bin/breaker_0.2 [ip-address]</code>
-eg: <code>~# ./bin/breaker_0.2 65.82.122.30</code>
+@==~# ./bin/breaker_0.2 [ip-address]==@
+eg: @==~# ./bin/breaker_0.2 65.82.122.30==@
 
 h2. Licence
 
