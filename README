@@ -27,8 +27,9 @@ You can compile the program with the following code:
 
 h2. Usage
 
-@==~# ./bin/breaker_0.2 [ip-address]==@
-eg: @==~# ./bin/breaker_0.2 65.82.122.30==@
+bc. ~# ./bin/breaker_0.2 [ip-address]
+eg:
+bc. ~# ./bin/breaker_0.2 65.82.122.30
 
 h2. Licence
 
